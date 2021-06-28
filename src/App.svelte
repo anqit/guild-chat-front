@@ -4,7 +4,7 @@
 	import Login from './login.svelte'
 </script>
 
-{#if $user}
+{#if $user.id}
 	<Chat />
 {:else}
 	<Login />

@@ -1,8 +1,8 @@
 import {readable, writable} from "svelte/store";
 
-export const rooms = writable([])
+export const rooms = writable({})
 export const selectedRoom = writable(-1)
-export const user = writable()
+export const user = writable({})
 
 export const socket = readable(null, set => {
     const s = new WebSocket(`ws://${process.env.API_ENDPOINT}/chat`)
@@ -12,16 +12,30 @@ export const socket = readable(null, set => {
         const [action, params] = JSON.parse(event.data)
         switch(action) {
             case "rooms_retrieved":
-                rooms.set(params)
+                rooms.set(params.reduce((map, r) => ({ ...map, [r.id]: r }), {}))
                 selectedRoom.set(params[0].id)
                 break
             case "room_created":
-                rooms.update(r => [...r, params])
+                rooms.update(rs => ({ ...rs, [params.roomId]: params }))
                 // selectedRoom.set(params.id)
-                break;
+                break
             case "message_sent":
-                break;
+                const { roomId } = params
+                rooms.update(rs => {
+                    const copy = { ...rs }
+                    const room = copy[roomId]
+
+                    if(room) {
+                        room.messages.push(params)
+                        copy[roomId] = room
+                    }
+
+                    return copy
+                })
+
+                break
             case "error":
+                console.log("ERROR", params)
                 break;
         }
     }

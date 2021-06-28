@@ -2,17 +2,14 @@
     import RoomLibrary from './roomLibrary.svelte'
     import Room from './room.svelte'
     import MessageInput from './messageInput.svelte'
-
-    // import { rooms, socket } from './store'
-
 </script>
 
-<table>
+<table style="width: available">
     <tr>
         <td>
             <RoomLibrary />
         </td>
-        <td>
+        <td class="wide">
             <Room />
             <MessageInput />
         </td>
@@ -24,5 +21,9 @@
         border-collapse: collapse;
         border: thin solid aquamarine;
         vertical-align: top;
+        position: relative;
+    }
+    .wide {
+        width: 1000px;
     }
 </style>

@@ -1,28 +1,24 @@
 <script>
-    import { onDestroy, onMount } from 'svelte'
+    import { onDestroy } from 'svelte'
     import Message from './message.svelte'
     import { rooms, selectedRoom } from './store'
 
     let room
-    onMount(() => room = $rooms.find(r => r.id === $selectedRoom))
-    // let room, un
-    // onMount(() => {
-    //     un = selectedRoom.subscribe(s => {
-    //         console.log('in sub', s, $rooms)
-    //         room = $rooms.find(r => r.id === s)
-    //     })
-    //     console.log("room info")
-    //     console.log($rooms, $selectedRoom, room)
-    // })
-    //
-    // onDestroy(un)
+    let unr = rooms.subscribe(rs => {
+        room = rs[$selectedRoom]
+    })
+    let uns = selectedRoom.subscribe(s => {
+        room = $rooms[s]
+    })
+
+    onDestroy(() => { unr(); uns(); })
 </script>
 
 <h1>{room ? room.name : 'Select a room to begin chatting'}</h1>
 <div>
     {#if room && room.messages}
         {#each room.messages as msg}
-            <Message message={msg} />
+            <Message msg={msg} />
         {:else}
             <div>Send a message to start the conversation!</div>
         {/each}

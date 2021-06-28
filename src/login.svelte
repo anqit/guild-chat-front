@@ -2,13 +2,15 @@
     import { user } from './store'
     import api from './api'
 
-    let newUser = ''
+    let name = ''
     const submit = async () => {
-        const { name } = await api.createUser(newUser)
-        user.set(name)
+        const u = await api.createUser(name)
+        $user = u
     }
 </script>
 
 <h1>Who are you?</h1>
-<input type="text" placeholder="what's your name?" bind:value={newUser} />
-<button on:click="{submit}" >Let's Talk!</button>
+<form on:submit|preventDefault={submit}>
+    <input type="text" placeholder="what's your name?" bind:value={name} />
+    <input type="submit" disabled={name.length === 0} value="Let's Talk!" />
+</form>

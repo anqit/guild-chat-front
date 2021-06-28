@@ -1,10 +1,9 @@
 <script>
     export let msg
 
-    const { author, roomId, message, timestamp } = msg
+    const { author, message, timestamp } = msg
 </script>
 
 <div tooltip={timestamp} >
-    <p>{message}</p>
-    <p>- {author}</p>
+    <p>{author} says {message}</p>
 </div>
