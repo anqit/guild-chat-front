@@ -1,7 +1,7 @@
 import {readable, writable} from "svelte/store";
 
 export const rooms = writable([])
-export const selectedRoom = writable(0)
+export const selectedRoom = writable(-1)
 export const user = writable()
 
 export const socket = readable(null, set => {

@@ -18,6 +18,7 @@
         {name}
     </div>
 {/each}
+
 <div>
     <input type="text" placeholder="new room" bind:value={newRoomName} />
     <button on:click={createRoom} disabled={newRoomName.length == 0}>+</button>
