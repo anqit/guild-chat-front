@@ -1,5 +1,5 @@
 <script>
-    import {selectedRoom, user} from "./store";
+    import {selectedRoom, user, socket} from "./store";
 
     const submitMessage = (message) => ({ roomId: selectedRoom, author: user, message })
 </script>

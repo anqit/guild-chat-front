@@ -3,10 +3,7 @@
     import api from './api'
 
     let newUser = ''
-    const submit = async (e) => {
-        console.log('event')
-        console.log(e)
-        console.log(JSON.stringify(e, null, 2))
+    const submit = async () => {
         const { name } = await api.createUser(newUser)
         user.set(name)
     }
