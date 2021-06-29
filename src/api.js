@@ -1,4 +1,4 @@
-const endpoint = process.env.API_ENDPOINT
+const endpoint = process.env.API_ENDPOINT || '0.0.0.0:8080'
 
 const createUser = async (name) => {
     try {

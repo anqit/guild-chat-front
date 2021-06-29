@@ -1,11 +1,13 @@
-import {readable, writable} from "svelte/store";
+import { readable, writable } from "svelte/store";
 
 export const rooms = writable({})
 export const selectedRoom = writable(-1)
 export const user = writable({})
 
+const endpoint = process.env.API_ENDPOINT || '0.0.0.0:8080'
+
 export const socket = readable(null, set => {
-    const s = new WebSocket(`ws://${process.env.API_ENDPOINT}/chat`)
+    const s = new WebSocket(`ws://${endpoint}/chat`)
     s.onopen = () => s.send(JSON.stringify(["get_rooms", {}]))
 
     s.onmessage = (event) => {
