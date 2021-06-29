@@ -12,11 +12,11 @@ export const socket = readable(null, set => {
         const [action, params] = JSON.parse(event.data)
         switch(action) {
             case "rooms_retrieved":
-                rooms.set(params.reduce((map, r) => ({ ...map, [r.id]: r }), {}))
-                selectedRoom.set(params[0].id)
+                params.length && rooms.set(params.reduce((map, r) => ({ ...map, [r.id]: r }), {}))
+                params[0] && selectedRoom.set(params[0].id)
                 break
             case "room_created":
-                rooms.update(rs => ({ ...rs, [params.roomId]: params }))
+                rooms.update(rs => ({ ...rs, [params.id]: params }))
                 // selectedRoom.set(params.id)
                 break
             case "message_sent":

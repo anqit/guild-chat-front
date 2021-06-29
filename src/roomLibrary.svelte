@@ -8,7 +8,7 @@
     let newRoomName = ''
     const createRoom = () => {
         if (newRoomName.length) {
-            $socket.send(JSON.stringify(["create_room", { name: newRoomName }]))
+            $socket.send(JSON.stringify(["create_room", { name: newRoomName, messages: [] }]))
             newRoomName = ''
         }
     }
