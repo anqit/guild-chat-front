@@ -1,9 +1,12 @@
 <script>
     export let msg
 
-    const { author, message, timestamp } = msg
+    let author, message, timestamp
+    $: {
+        ({ author, message, timestamp } = msg)
+    }
 </script>
 
-<div tooltip={timestamp} >
+<div title={timestamp} >
     <p>{author} says {message}</p>
 </div>
