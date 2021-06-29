@@ -13,7 +13,7 @@ export const socket = readable(null, set => {
         switch(action) {
             case "rooms_retrieved":
                 params.length && rooms.set(params.reduce((map, r) => ({ ...map, [r.id]: r }), {}))
-                params[0] && selectedRoom.set(params[0].id)
+                // params[0] && selectedRoom.set(params[0].id)
                 break
             case "room_created":
                 rooms.update(rs => ({ ...rs, [params.id]: params }))
