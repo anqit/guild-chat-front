@@ -36,7 +36,7 @@ export const socket = readable(null, set => {
                 break
             case "error":
                 console.log("ERROR", params)
-                break;
+                break
         }
     }
     set(s)

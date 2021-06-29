@@ -15,7 +15,7 @@
 </script>
 
 <h1>Rooms</h1>
-{#each Object.values($rooms) as {name, id}}
+{#each Object.values($rooms) as { name, id }}
     <div on:click="{() => selectRoom(id)}" class:selected="{id === $selectedRoom}" class="room">
         {name}
     </div>

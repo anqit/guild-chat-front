@@ -14,8 +14,8 @@
     onDestroy(() => { unr(); uns(); })
 </script>
 
-<h1>{room ? room.name : 'Select a room to begin chatting'}</h1>
-<div>
+<h1>{room ? room.name : 'Select or create a room to begin chatting'}</h1>
+<div class="scroll">
     {#if room && room.messages}
         {#each room.messages as msg}
             <Message msg={msg} />
@@ -26,5 +26,8 @@
 </div>
 
 <style>
-
+    .scroll {
+        height: 350px;
+        overflow-y: auto;
+    }
 </style>
